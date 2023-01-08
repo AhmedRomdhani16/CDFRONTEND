@@ -1,7 +1,10 @@
-FROM node:latest as node
+FROM node:10-alpine as build-step
+RUN mkdir -p /app
 WORKDIR /app
-COPY . .
+COPY package.json /app
 RUN npm install
+COPY . /app
 RUN npm run build --prod
-FROM nginx:alpine
-COPY --from=node /app/dist/demo-app /usr/share/nginx/html
+FROM nginx:1.17.1-alpine
+COPY --from=build-step /app/docs /usr/share/nginx/html
+
