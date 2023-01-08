@@ -1,0 +1,54 @@
+pipeline {    
+    options { skipDefaultCheckout() }
+     agent {label 'master'} 
+    tools {
+        nodejs 'npm'
+    }
+      environment {
+        NEXUS_VERSION = "nexus3"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "192.168.43.230:8081"
+        NEXUS_REPOSITORY = "DEVOPS"
+        NEXUS_CREDENTIAL_ID = "nexusJenkins"
+        registry = "ahmed991/backend"
+        registryCredential = 'dockerhub'
+        NAME = "ahmed991/backend"
+        VERSION = "${env.BUILD_ID}"
+        IMAGE = "${NAME}:${VERSION}"
+        
+    }
+      
+    stages { 
+     stage('SCM') {
+            steps {
+               
+                git  branch: 'main', url: 'https://github.com/AhmedRomdhani16/CDFRONTEND'
+                 
+            }
+        }
+     
+           stage('SonarQube Scan Code Quality') {
+            steps {
+                script {
+                    scannerHome = tool 'Sonar';
+                }
+                withSonarQubeEnv(installationName:'Sonar') {
+                  sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=quote -Dsonar.analysis.mode=publish -Dsonar.sources=src -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info -Dsonar.exclusions=node_modules/*,**/*.spec.ts"
+                }
+            }
+        } 
+     
+        
+        
+       
+       
+
+        
+        
+        
+    
+        
+        
+}
+            
+}
