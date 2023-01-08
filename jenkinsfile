@@ -1,7 +1,7 @@
 pipeline {    
     options { skipDefaultCheckout() }
      agent {label 'master'} 
-   tools {nodejs "nodejs"}
+   tools {nodejs "npm"}
       environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
