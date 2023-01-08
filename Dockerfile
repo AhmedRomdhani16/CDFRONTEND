@@ -1,13 +1,7 @@
-FROM node:15.00-alpine AS build
+FROM node:latest as node
 WORKDIR /app
-COPY package*.json /app/
+COPY . .
 RUN npm install
-RUN npm install -g @angular/cli npm@latest
-COPY ./ /app/
-RUN ng build --extract-css --output-path=dist --prod=true
-
-
-# Run Stage
-FROM nginx:1.17.1-alpine
-COPY default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist /usr/share/nginx/html
+RUN npm run build --prod#stage 2
+FROM nginx:alpine
+COPY --from=node /app/dist/demo-app /usr/share/nginx/html
