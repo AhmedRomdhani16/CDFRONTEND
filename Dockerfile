@@ -2,7 +2,7 @@ FROM node:12.7-alpine AS build
 WORKDIR /app
 COPY package*.json /app/
 RUN npm install
-RUN npm install -g @angular/cli@7.3.9
+RUN npm install -g @angular/cli
 COPY ./ /app/
 RUN ng build --extract-css --output-path=dist --prod=true
 
