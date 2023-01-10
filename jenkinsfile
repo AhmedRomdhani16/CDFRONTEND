@@ -57,6 +57,15 @@ pipeline {
                 }
             }
         }
+         stage('Email') {
+           steps{
+           script{
+                   emailext body: 'job completed successfully', subject: 'build success', to: 'ahmed.romdhani@esprit.tn'
+                    
+                }
+                }
+        }
+        
        
        
 
