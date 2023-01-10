@@ -60,7 +60,7 @@ pipeline {
          stage('Email') {
            steps{
            script{
-                   emailext body: 'job completed successfully', subject: 'build success', to: 'ahmed.romdhani@esprit.tn'
+                   emailext body: 'the frontend app is completed successfully', subject: 'frontend build success', to: 'ahmed.romdhani@esprit.tn'
                     
                 }
                 }
