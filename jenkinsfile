@@ -8,9 +8,9 @@ pipeline {
         NEXUS_URL = "192.168.43.230:8081"
         NEXUS_REPOSITORY = "DEVOPS"
         NEXUS_CREDENTIAL_ID = "nexusJenkins"
-        registry = "ahmed991/backend"
+        registry = "ahmed991/front"
         registryCredential = 'dockerhub'
-        NAME = "ahmed991/backend"
+        NAME = "ahmed991/front"
         VERSION = "${env.BUILD_ID}"
         IMAGE = "${NAME}:${VERSION}"
         
