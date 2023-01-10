@@ -60,7 +60,7 @@ pipeline {
          stage('Email') {
            steps{
            script{
-                   emailext body: 'the frontend app is completed successfully the tag image is : ${VERSION}', subject: 'frontend build success', to: 'ahmed.romdhani@esprit.tn'
+                   emailext body: 'the pipline of frontend  app is completed successfully ', subject: 'frontend build success', to: 'ahmed.romdhani@esprit.tn'
                     
                 }
                 }
